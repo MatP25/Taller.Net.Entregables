@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<section class="">
+    <h2 class="mt-3 mb-3">Book information</h2>
+    <div>
+        <h3>@Model.Title</h3>
+        <p><strong>Author:</strong> @Model.Author</p>
+        <p><strong>Published Date:</strong> @Model.PublishedDate.ToShortDateString()</p>
+        <p><strong>ISBN:</strong> @Model.Isbn</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo culpa dolores velit pariatur reiciendis distinctio quas doloribus nesciunt alias ullam, minima repudiandae. Facilis dignissimos quibusdam voluptas asperiores, possimus excepturi minus!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, cum quidem accusamus deleniti sit maiores voluptates quam reiciendis temporibus corrupti, quia doloremque explicabo similique cupiditate vitae, impedit harum magni numquam?</p>
+    </div>
+</section>

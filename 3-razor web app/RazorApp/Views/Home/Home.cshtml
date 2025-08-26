@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Home";
+    var bookCount = ViewData["BookCount"] as int? ?? 0;
+}
+
+<section class="text-center">
+    <h1 class="mt-3 mb-3">Welcome to the Book Repository</h1>
+    <p>There are @bookCount books registered!</p>
+</section>

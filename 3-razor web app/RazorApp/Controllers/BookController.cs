@@ -25,32 +25,36 @@ public class BookController : Controller
         var book = repository.GetBookByIsbn(isbn);
         if (book == null)
         {
+            logger.LogWarning($"Book with ISBN: {isbn} not found");
             return NotFound("Book not found");
         }
         return View("BookDetails", book);
     }
 
-    [HttpPost("/books/delete/{isbn}")]
+    [HttpPost("/books/delete")]
     public IActionResult DeleteBook(string isbn)
     {
-        logger.LogInformation($"Deleting book with ISBN: {isbn}");
         var success = repository.DeleteBook(isbn);
         if (!success)
         {
+            logger.LogWarning($"Attempted to delete non-existent book with ISBN: {isbn}");
             return NotFound("Book not found");
         }
+        logger.LogInformation($"Deleted book with ISBN: {isbn}");
         return RedirectToAction("GetAllBooks");
     }
 
     [HttpPost("/books/add")]
-    public IActionResult AddBook(string isbn, string title, string author, DateTime publishedDate)
+    public IActionResult AddBook([FromForm] Book book)
     {
-        logger.LogInformation($"Adding book with ISBN: {isbn}, Title: {title}, Author: {author}, PublishedDate: {publishedDate}");
         if (!ModelState.IsValid)
         {
+            logger.LogWarning("Invalid model state while adding a book");
             return View("AddBookForm");
         }
-        repository.AddBook(isbn, title, author, publishedDate);
+
+        logger.LogInformation($"Adding book with ISBN: {book.Isbn}, Title: {book.Title}, Author: {book.Author}, PublishedDate: {book.PublishedDate}");
+        repository.AddBook(book.Isbn, book.Title, book.Author, book.PublishedDate);
         return RedirectToAction("GetAllBooks");
     }
 

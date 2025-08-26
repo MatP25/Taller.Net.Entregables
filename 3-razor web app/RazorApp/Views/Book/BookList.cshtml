@@ -31,7 +31,8 @@
                         </a>
                     </td>
                     <td>
-                        <form asp-action="DeleteBook" asp-route-isbn="@book.Isbn">
+                        <form asp-action="DeleteBook">
+                            <input type="hidden" name="isbn" value="@book.Isbn" readonly/>
                             <button 
                                 class="btn btn-danger btn-sm" 
                                 type="submit"

@@ -14,4 +14,7 @@ public class Book
         Author = author;
         PublishedDate = publishedDate;
     }
+
+    // Parameterless constructor for model binding
+    public Book() { }
 }

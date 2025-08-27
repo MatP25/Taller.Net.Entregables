@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
+[Route("books")]
 public class BookController : Controller
 {
     private readonly IRepository repository;
@@ -10,7 +11,7 @@ public class BookController : Controller
         this.repository = repository;
     }
 
-    [HttpGet("/books")]
+    [HttpGet]
     public IActionResult GetAllBooks()
     {
         logger.LogInformation("Fetching all books");
@@ -18,7 +19,7 @@ public class BookController : Controller
         return View("BookList", books);
     }
 
-    [HttpGet("/books/{isbn}")]
+    [HttpGet("/{isbn}")]
     public IActionResult GetBookByIsbn(string isbn)
     {
         logger.LogInformation($"Fetching book with ISBN: {isbn}");
@@ -31,7 +32,7 @@ public class BookController : Controller
         return View("BookDetails", book);
     }
 
-    [HttpPost("/books/delete")]
+    [HttpPost("/delete")]
     public IActionResult DeleteBook(string isbn)
     {
         var success = repository.DeleteBook(isbn);
@@ -44,7 +45,7 @@ public class BookController : Controller
         return RedirectToAction("GetAllBooks");
     }
 
-    [HttpPost("/books/add")]
+    [HttpPost("/add")]
     public IActionResult AddBook([FromForm] Book book)
     {
         if (!ModelState.IsValid)
@@ -58,7 +59,7 @@ public class BookController : Controller
         return RedirectToAction("GetAllBooks");
     }
 
-    [HttpGet("/books/add")]
+    [HttpGet("/add")]
     public IActionResult AddBookForm()
     {
         return View("AddBookForm");

@@ -2,9 +2,10 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var bookCount = ViewData["BooksCount"] ?? 0;
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <a asp-page="./Book/Index">Books</a>
+    <p>There are @bookCount books</p>
 </div>
